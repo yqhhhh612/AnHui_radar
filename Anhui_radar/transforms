@@ -1,0 +1,54 @@
+def PoleToPole(lonA,latA,hA,lonB,latB,hB,ap,ep,Lp):
+    from math import cos,sin,acos,asin,atan2,pi,radians
+    '''
+    :param lonA: A雷达的经度
+    :param latA: A雷达的维度
+    :param hA: A雷达的海拔高度，单位千米
+    :param lonB: B雷达的经度
+    :param latB: B雷达的维度
+    :param hB: B雷达的海拔高度，单位千米
+    :param ap: 具体库相对于A的方位角
+    :param ep: 具体库相对于A的仰角
+    :param Lp: 具体库相对于A斜距
+    :return: 该库相对于B的方位角、仰角和斜距
+    所有参与运算的角度的单位均为弧度
+    输出的结果均为角度单位
+    '''
+    #参数准备以及单位统一
+    ap=radians(ap)
+    ep=radians(ep)
+    Re=6371.393#地球半径
+    Rm=4/3*Re#等效地球半径
+    lonA=radians(lonA)
+    latA=radians(latA)
+    lonB=radians(lonB)
+    latB=radians(latB)
+    #求出探测点的经纬度和高度
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore',RuntimeWarning)
+        H = hA + Lp * sin(ep) + (Lp * Lp * cos(ep) * cos(ep)) / (2 * Re)  # 此处求出H
+        s = Rm * asin((Lp * cos(ep)) / (Rm + H))  # 两点地表距离
+        lat = asin(cos(s / Re) * sin(latA) + sin(s / Re) * cos(latA) * cos(ap))
+
+        lon = asin((sin(ap) * sin(s / Re)) / cos(lat)) + lonA  # 单位统一
+        # 求测点相对于B点的方位角仰角和斜距
+        ss = Re * acos(sin(lat) * sin(latB) + cos(lat) * cos(latB) * cos(lon - lonB))
+    ed=atan2((cos(ss/Rm)-Rm/(Rm+H-hB)),sin(ss/Rm))
+    ld=(Rm+H-hB)*sin(ss/Rm)/cos(ed)
+    aa=asin(cos(lat)*sin(lon-lonB)/sin(ss/Re))
+    if lon>=lonB:
+        if lat>=latB:
+            ad=aa
+            ad=ad*180/pi
+        else:
+            ad=pi-aa
+            ad = ad * 180 / pi
+    else:
+        if lat>=latB:
+            ad=2*pi+aa
+            ad = ad * 180 / pi
+        else:
+            ad=pi-aa
+            ad = ad * 180 / pi
+    ed=ed*180/pi
+    return ad,ed,ld
