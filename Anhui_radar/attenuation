@@ -20,7 +20,7 @@ def ZH_gen(Z, a=1.37e-4, b=0.779, binlength=0.15):
     return Zc
 
 
-def zh_kdp_gen(Z, KDP, binlength=0.15):
+def ZH_KDP_gen(Z, KDP, binlength=0.15):
     '''
     :param Z: reflectivity,numpy array (nrays,nbins) such as (360,920)
     :param KDP: specific differential phase
