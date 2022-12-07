@@ -2,10 +2,10 @@ def PoleToPole(lonA,latA,hA,lonB,latB,hB,ap,ep,Lp):
     from math import cos,sin,acos,asin,atan2,pi,radians
     '''
     :param lonA: A雷达的经度
-    :param latA: A雷达的维度
+    :param latA: A雷达的纬度
     :param hA: A雷达的海拔高度，单位千米
     :param lonB: B雷达的经度
-    :param latB: B雷达的维度
+    :param latB: B雷达的纬度
     :param hB: B雷达的海拔高度，单位千米
     :param ap: 具体库相对于A的方位角
     :param ep: 具体库相对于A的仰角
