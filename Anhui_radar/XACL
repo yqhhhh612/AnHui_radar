@@ -1,3 +1,14 @@
+'''
+This is a new method for X-band attenuation correction.
+The model is a trained based on lightGBM called XACL 
+9 variables are required:
+ZH(X-band radar reflectivity),ZDR(differential reflectivity),
+KDP(differential phase shift rate),PHDP(differential phase shift),
+ROHV(copolarization correlation coefficient),V(doppler velocity),
+W(spectrum width),range(distance from radar antenna),
+meanZH(the average reflectivity between range gates and radar antenna).
+
+'''
 import joblib
 import numpy as np
 from tqdm import tqdm
@@ -198,7 +209,7 @@ import time
 from x_radar_io import read_vw,read_xz,read_zdr,read_rohv,read_phdp
 start = time.time()
 file = r'E:\有效数据\20210708\150\VTB20210708104642.010'
-#model=joblib.load(r'D:\softwareusr\pythonpractical\machinelearn\x雷达订正处理\merfirtry_parabe.h5')
+#model=joblib.load('./x雷达订正处理\XACL_MODEL.h5')
 model=joblib.load(r'路径+模型文件名')
 test_0=np.zeros((1,9))
 pre_0=model.predict(test_0)
