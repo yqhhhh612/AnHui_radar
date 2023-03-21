@@ -1,5 +1,5 @@
 '''
-This is a new method for X-band attenuation correction.
+This is a new method for X-band weather radar attenuation correction.
 The model is a trained based on lightGBM called XACL 
 9 variables are required:
 ZH(X-band radar reflectivity),ZDR(differential reflectivity),
