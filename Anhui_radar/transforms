@@ -52,3 +52,12 @@ def PoleToPole(lonA,latA,hA,lonB,latB,hB,ap,ep,Lp):
             ad = ad * 180 / pi
     ed=ed*180/pi
     return ad,ed,ld
+  
+ def arrayround(arr,n=0):
+    flag = np.where(arr>=0,1,-1)
+    arr = np.abs(arr)
+    arr10 = arr*10**(n+1)
+    arr20 = np.floor(arr10)
+    arr30 = np.where(arr20%10==5,(arr20+1)/10**(n+1),arr20/10**(n+1))
+    result = np.around(arr30,n)
+    return result*flag
