@@ -389,7 +389,7 @@ def read_pol_vcp21D(file):
             fid.read(12)
             BINNUMBER_kdp = int(Length_kdp / Bin_length_kdp)
             KDP = np.frombuffer(fid.read(Length_kdp), dtype='u1')
-            KDP = np.where(W >= 5, (KDP - Offset_kdp) / Scale_kdp, np.nan)
+            KDP = np.where(KDP >= 5, (KDP - Offset_kdp) / Scale_kdp, np.nan)
             KDP_arr.append(KDP)
             #数据类型7 cc
             Data_type_cc, = struct.unpack('i', fid.read(4))
