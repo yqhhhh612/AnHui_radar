@@ -28,6 +28,9 @@ def ZH_KDP_gen(Z, KDP, binlength=0.15):
     :return: corrected reflectivity array.
     '''
     ZHnarray = np.zeros_like(Z)
+    z_part_1 = np.where(Z[:, 0:400] > 34, -5, Z[:, 0:400])  # 去除靠近天线的异常值
+    z_part_2 = Z[:, 400:]
+    Z = np.hstack([z_part_1, z_part_2])
     for i in range(Z.shape[0]):
         AH = 0
         for j in range(Z.shape[1]):
