@@ -1,4 +1,13 @@
 import numpy as np
+import numpy as np
+from matplotlib import pyplot as plt
+import matplotlib as mpl
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.ticker as mticker
+from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
+from cartopy.io.shapereader import Reader
 def map_with_radar(refarray, longitude, latitude, savepath=None, d=''):
     '''
     :param rawarray:
@@ -9,15 +18,7 @@ def map_with_radar(refarray, longitude, latitude, savepath=None, d=''):
     :param d:
     :return:
     '''
-    import numpy as np
-    from matplotlib import pyplot as plt
-    import matplotlib as mpl
-    import cartopy.crs as ccrs
-    import cartopy.feature as cfeature
-    import matplotlib.ticker as mticker
-    from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
-    from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
-    from cartopy.io.shapereader import Reader
+
     def recolormaps_0():
         import matplotlib.colors as colors
         cdict = ['#00BFFF',
